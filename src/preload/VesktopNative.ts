@@ -98,6 +98,20 @@ export const VesktopNative = {
         copyImage: (imageBuffer: Uint8Array, imageSrc: string) =>
             invoke<void>(IpcEvents.CLIPBOARD_COPY_IMAGE, imageBuffer, imageSrc)
     },
+    voice: {
+        onToggleSelfMute: (listener: (...args: any[]) => void) => {
+            ipcRenderer.on(IpcEvents.TOGGLE_SELF_MUTE, listener);
+        },
+        onSelfMute: (listener: (...args: any[]) => void) => {
+            ipcRenderer.on(IpcEvents.SELF_MUTE, listener);
+        },
+        onSelfUnmute: (listener: (...args: any[]) => void) => {
+            ipcRenderer.on(IpcEvents.SELF_UNMUTE, listener);
+        },
+        onToggleSelfDeaf: (listener: (...args: any[]) => void) => {
+            ipcRenderer.on(IpcEvents.TOGGLE_SELF_DEAF, listener);
+        }
+    },
     debug: {
         launchGpu: () => invoke<void>(IpcEvents.DEBUG_LAUNCH_GPU),
         launchWebrtcInternals: () => invoke<void>(IpcEvents.DEBUG_LAUNCH_WEBRTC_INTERNALS)
